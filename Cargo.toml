@@ -4,8 +4,6 @@ version = "0.0.1"
 authors = ["charles"]
 edition = "2018"
 
-build = "cpp/build.rs"
-
 [dependencies]
 cpp = "0.5.1"
 
