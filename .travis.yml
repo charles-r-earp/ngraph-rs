@@ -6,16 +6,20 @@ env:
     - CRATE_NAME=ngraph
 install: 
   - "source ~/.cargo/env || true"
-language: rust
-env: TARGET=x86_64-unknown-linux-gnu
-notifications: 
-  email: 
-    on_success: never
-script:
   - "git clone https://github.com/NervanaSystems/ngraph"
   - "cd ngraph"
   - "mkdir build"
   - "cd build"
   - "cmake .. -DNGRAPH_USE_PREBUILT_LLVM=ON"
   - "make -j5 && sudo make install"
+language: rust
+env: TARGET=x86_64-unknown-linux-gnu
+notifications: 
+  email: 
+    on_success: never
+script:
+  - "cd $TRAVIS_BUILD_DIR"
+  - "cargp build --examples"
+  - "cargo test"
+  - "cargo run --example computation_example"
 sudo: required
