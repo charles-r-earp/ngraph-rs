@@ -12,12 +12,10 @@ notifications:
   email: 
     on_success: never
 script:
-  - "ls"
   - "git clone https://github.com/NervanaSystems/ngraph"
   - "cd ngraph"
   - "mkdir build"
   - "cd build"
-  - "ls"
-  - "cmake .. -DNGRAPH_USE_PREBUILT_LLVM"
+  - "cmake .. -DNGRAPH_USE_PREBUILT_LLVM=ON"
   - "make -j5 && sudo make install"
 sudo: required
