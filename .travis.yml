@@ -6,12 +6,9 @@ env:
     - CRATE_NAME=ngraph
 install: 
   - "source ~/.cargo/env || true"
-  - "git clone https://github.com/NervanaSystems/ngraph"
-  - "cd ngraph"
-  - "mkdir build"
-  - "cd build"
-  - "cmake .. -DNGRAPH_USE_PREBUILT_LLVM=ON"
-  - "make && sudo make install"
+  - "suda apt install -y wget"
+  - "wget wget --no-check-certificate https://drive.google.com/open?id=1kQlEjpxWoJ3rmbbhcx6qSS6vbahILh8r -O ngraph_20190525-1_amd64.deb"
+  - "sudo dpkg -i ngraph_20190525-1_amd64.deb"
 language: rust
 env: TARGET=x86_64-unknown-linux-gnu
 notifications: 
