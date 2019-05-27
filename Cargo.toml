@@ -1,8 +1,12 @@
 [package]
 name = "ngraph"
 version = "0.0.1"
-authors = ["charles"]
+authors = ["Charles Earp <charles.r.earp@gmail.com>"]
 edition = "2018"
+description = "Rust bindings for nGraph https://github.com/NervanaSystems/ngraph"
+repository = "https://github.com/charles-r-earp/ngraph-rs"
+keywords = ["Auto", "Learning", "Tensor", "Grad", "Graph"]
+publish = false
 
 [dependencies]
 cpp = "0.5.1"
