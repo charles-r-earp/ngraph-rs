@@ -6,8 +6,11 @@ env:
     - CRATE_NAME=ngraph
 install: 
   - "source ~/.cargo/env || true"
-  - "wget --no-check-certificate https://drive.google.com/open?id=1n4YwBj5AHRMUlJwyQwxyWP-4Q34RG5YL -O ngraph-build"
-  - "cd ngraph-build"
+  - "git clone https://github.com/NervanaSystems/ngraph"
+  - "cd ngraph"
+  - "mkdir build"
+  - "cd build"
+  - "cmake .. -DNGRAPH_USE_PREBUILT_LLVM=ON -DNGRAPH_UNIT_TEST_ENABLE=OFF -DNGRAPH_NOP_ENABLE=OFF -DNGRAPH_TOOLS_ENABLE=OFF -DNGRAPH_CPU_ENABLE=OFF"
   - "sudo make install"
 language: rust
 env: TARGET=x86_64-unknown-linux-gnu

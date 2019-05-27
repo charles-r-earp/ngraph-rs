@@ -13,10 +13,14 @@ fn main() {
   // Make the function
   let f = Function::new([&Node::from(&t1)], [&a, &b, &c]);
   
-  println!("registered devices: {:?}", runtime::Backend::get_registered_devices());
+  let devices = runtime::Backend::get_registered_devices();
+  println!("registered devices: {:?}", &devices);
+  
+  let device = &devices[0];
+  println!("using {:?}", device);
   
   // Create the backend
-  let backend = runtime::Backend::create("CPU").unwrap();
+  let backend = runtime::Backend::create(device).unwrap();
   
   // Allocate tensors for arguments a, b, c
   let t_a = backend.create_tensor(ElementType::F32, &s);

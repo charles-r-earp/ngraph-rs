@@ -82,8 +82,8 @@ impl Backend {
   }
   #[inline]
   pub fn create<S>(name: S) -> Result<Self, BackendError>
-    where S: Into<Vec<u8>> {
-    let name = CString::new(name.into()).unwrap();
+    where S: AsRef<[u8]> {
+    let name = CString::new(name.as_ref()).unwrap();
     let cstr: *const c_char = name.as_ptr();
     let backend = cpp!(unsafe [cstr as "const char*"] -> Backend as "std::shared_ptr<ngraph::runtime::Backend>" {
       return ngraph::runtime::Backend::create(std::string(cstr));
