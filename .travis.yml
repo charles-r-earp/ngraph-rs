@@ -6,7 +6,6 @@ env:
     - CRATE_NAME=ngraph
 install: 
   - "source ~/.cargo/env || true"
-  - "suda apt install -y wget"
   - "wget wget --no-check-certificate https://drive.google.com/open?id=1kQlEjpxWoJ3rmbbhcx6qSS6vbahILh8r -O ngraph_20190525-1_amd64.deb"
   - "sudo dpkg -i ngraph_20190525-1_amd64.deb"
 language: rust
