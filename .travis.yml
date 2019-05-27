@@ -7,10 +7,10 @@ before_deploy:
 before_install: 
   - "set -e"
   - "rustup self update"
-branches: 
-  only: 
-    - /^v\d+\.\d+\.\d+.*$/
-    - master
+#branches: 
+#  only: 
+#    - /^v\d+\.\d+\.\d+.*$/
+#    - master
 cache: cargo
 dist: trusty
 env: 
