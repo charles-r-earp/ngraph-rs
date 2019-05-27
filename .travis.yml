@@ -1,0 +1,29 @@
+language: rust
+rust:
+  - stable
+  - beta
+  - nightly
+matrix:
+  allow_failures:
+    - rust: nightly
+  fast_finish: true
+cargo build --verbose
+cache: cargo
+cargo test --verbose
+before_install:
+  - sudo apt update
+install:
+  - sudo apt install -y build-essential cmake clang-3.9 clang-format-3.9 git curl zlib1g zlib1g-dev libtinfo-dev unzip autoconf automake libtool
+  - git clone https://github.com/NervanaSystems/ngraph
+  - cd ngraph
+  - mkdir build && cd build
+  - cmake .. -DNGRAPH_USE_PREBUILT_LLVM=ON
+  - make -j5 && sudo make install
+  - git clone https://github.com/charles-r-earp/ngraph-rs
+before_script:
+  - cd ngraph-rs
+  - cargo build 
+sript:
+  - cargo build --all-targets -vv
+  - cargo test
+  - cargo run --example computation_example
