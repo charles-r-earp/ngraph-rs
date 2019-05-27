@@ -11,7 +11,7 @@ install:
   - "mkdir build"
   - "cd build"
   - "cmake .. -DNGRAPH_USE_PREBUILT_LLVM=ON"
-  - "make -j5 && sudo make install"
+  - "make && sudo make install"
 language: rust
 env: TARGET=x86_64-unknown-linux-gnu
 notifications: 
