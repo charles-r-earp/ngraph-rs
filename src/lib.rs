@@ -1,3 +1,5 @@
+#![recursion_limit="1000"]
+pub mod runtime;
 pub mod op;
 pub use op::ParameterVector;
 mod element_type;
@@ -10,3 +12,4 @@ mod node;
 pub use node::{Node, NodeVector};
 mod function;
 pub use function::Function;
+pub mod example;
