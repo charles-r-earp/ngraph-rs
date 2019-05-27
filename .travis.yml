@@ -1,30 +1,16 @@
+---
 cache: cargo
-dist: trusty
+dist: xenial
 env: 
   global: 
     - CRATE_NAME=ngraph
 install: 
   - "source ~/.cargo/env || true"
 language: rust
-matrix: 
-  include: 
-    - 
-      env: TARGET=x86_64-unknown-linux-gnu
-    -
-      env: TARGET=x86_64-apple-darwin
-      os: osx
-    -
-      env: TARGET=x86_64-pc-windows-gnu
-    - 
-      env: TARGET=x86_64-unknown-linux-gnu
-      rust: nightly
-    - 
-      env: TARGET=x86_64-apple-darwin
-      os: osx
-      rust: nightly
+env: TARGET=x86_64-unknown-linux-gnu
 notifications: 
   email: 
     on_success: never
 script: 
-  - echo "Hello World!"
+  - "git clone https://github.com/NervanaSystems/ngraph"
 sudo: required
