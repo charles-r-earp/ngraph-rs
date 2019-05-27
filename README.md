@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/charles-r-earp/ngraph-rs.svg?branch=master)](https://travis-ci.com/charles-r-earp/ngraph-rs)
 # ngraph-rs
 Rust bindings for nGraph
 
