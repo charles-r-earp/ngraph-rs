@@ -12,4 +12,3 @@ mod node;
 pub use node::{Node, NodeVector};
 mod function;
 pub use function::Function;
-pub mod example;
