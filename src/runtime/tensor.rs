@@ -10,12 +10,6 @@ cpp_class!(pub unsafe struct Tensor as "std::shared_ptr<ngraph::runtime::Tensor>
 
 impl Tensor {
   #[inline]
-  pub fn ptr(&self) -> usize {
-    cpp!(unsafe [self as "std::shared_ptr<ngraph::runtime::Tensor>*"] -> usize as "std::size_t" {
-      return reinterpret_cast<std::size_t>(self->get());
-    })
-  } 
-  #[inline]
   pub fn write<'d, T>(&self, offset: usize, data: &'d [T]) {
     let p = data.as_ptr();
     let n = data.len() * mem::size_of::<T>();
@@ -65,4 +59,5 @@ impl<'a, 't> From<&'a [&'t mut Tensor]> for TensorVector {
     tensors.as_slice().into()
   }
 }
+
 
