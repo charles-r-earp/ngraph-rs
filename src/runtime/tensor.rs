@@ -10,19 +10,19 @@ cpp_class!(pub unsafe struct Tensor as "std::shared_ptr<ngraph::runtime::Tensor>
 
 impl Tensor {
     #[inline]
-    pub fn write<'d, T>(&self, offset: usize, data: &'d [T]) {
+    pub fn write<'d, T>(&self, data: &'d [T]) {
         let p = data.as_ptr();
         let n = data.len() * mem::size_of::<T>();
-        cpp!(unsafe [self as "std::shared_ptr<ngraph::runtime::Tensor>*", p as "const void*", offset as "std::size_t", n as "std::size_t"] {
-          (*self)->write(p, offset, n);
+        cpp!(unsafe [self as "std::shared_ptr<ngraph::runtime::Tensor>*", p as "const void*", n as "std::size_t"] {
+          (*self)->write(p, n);
         });
     }
     #[inline]
-    pub fn read<'d, T>(&self, offset: usize, data: &'d mut [T]) {
+    pub fn read<'d, T>(&self, data: &'d mut [T]) {
         let p = data.as_mut_ptr();
         let n = data.len() * mem::size_of::<T>();
-        cpp!(unsafe [self as "std::shared_ptr<ngraph::runtime::Tensor>*", p as "void*", offset as "std::size_t", n as "std::size_t"] {
-          (*self)->read(p, offset, n);
+        cpp!(unsafe [self as "std::shared_ptr<ngraph::runtime::Tensor>*", p as "void*", n as "std::size_t"] {
+          (*self)->read(p, n);
         });
     }
 }
