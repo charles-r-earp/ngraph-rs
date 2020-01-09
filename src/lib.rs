@@ -1,6 +1,6 @@
-#![recursion_limit="1000"]
-pub mod runtime;
+#![recursion_limit = "1000"]
 pub mod op;
+pub mod runtime;
 pub use op::ParameterVector;
 mod element_type;
 pub use element_type::ElementType;
