@@ -1,19 +1,14 @@
-use crate::{ElementType, Node, Shape};
-use cpp::*;
 use std::ops::Deref;
+
+use cpp::*;
+
+use crate::{ElementType, Node, Shape};
 
 cpp! {{
   #include <ngraph/op/parameter.hpp>
 }}
 
 cpp_class!(pub unsafe struct Parameter as "std::shared_ptr<ngraph::op::Parameter>");
-/*
-#[inline]
-fn new_parameter<'s>(element_type: ElementType, shape: &'s Shape) -> Parameter {
-  cpp!(unsafe [element_type as "ngraph::element::Type", shape as "ngraph::Shape*"] -> Parameter as "std::shared_ptr<ngraph::op::Parameter>" {
-    return std::make_shared<ngraph::op::Parameter>(element_type, *shape);
-  })
-}*/
 
 impl Parameter {
     #[inline]

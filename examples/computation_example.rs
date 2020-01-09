@@ -30,15 +30,15 @@ fn main() {
     let mut t_result = backend.create_tensor(ElementType::F32, &s);
 
     // Initialize tensors
-    t_a.write::<f32>(0, &[1., 2., 3., 4., 5., 6.]);
-    t_b.write::<f32>(0, &[7., 8., 9., 10., 11., 12.]);
-    t_c.write::<f32>(0, &[1., 0., -1., -1., 1., 2.]);
+    t_a.write::<f32>(&[1., 2., 3., 4., 5., 6.]);
+    t_b.write::<f32>(&[7., 8., 9., 10., 11., 12.]);
+    t_c.write::<f32>(&[1., 0., -1., -1., 1., 2.]);
     // Invoke the function
     let exec = backend.compile(&f).unwrap();
     exec.call([&mut t_result], [&t_a, &t_b, &t_c]);
 
     // Get the result
     let mut r = [0f32; 6];
-    t_result.read(0, &mut r);
+    t_result.read(&mut r);
     println!("[{:?}\n {:?}]", &r[..3], &r[3..]);
 }

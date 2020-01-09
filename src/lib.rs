@@ -1,14 +1,16 @@
-#![recursion_limit = "1000"]
+#![recursion_limit = "1024"]
+
+mod element_type;
+mod function;
+mod node;
 pub mod op;
 pub mod runtime;
-pub use op::ParameterVector;
-mod element_type;
-pub use element_type::ElementType;
 mod shape;
-pub use shape::Shape;
 mod strides;
-pub use strides::Strides;
-mod node;
-pub use node::{Node, NodeVector};
-mod function;
-pub use function::Function;
+
+pub use self::element_type::ElementType;
+pub use self::function::Function;
+pub use self::node::{Node, NodeVector};
+pub use self::op::{Parameter, ParameterVector, RoundingType};
+pub use self::shape::Shape;
+pub use self::strides::Strides;

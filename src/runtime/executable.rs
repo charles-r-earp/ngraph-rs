@@ -26,7 +26,6 @@ impl Executable {
         cpp!(unsafe [self as "std::shared_ptr<ngraph::runtime::Executable>*",
                      outputs as "std::vector<std::shared_ptr<ngraph::runtime::Tensor>>",
                      inputs as "std::vector<std::shared_ptr<ngraph::runtime::Tensor>>"] {
-          //std::cout << "Output[0].get(): " << reinterpret_cast<std::size_t>(outputs[0].get()) << std::endl;
           (*self)->call(outputs, inputs);
         });
     }
