@@ -7,7 +7,6 @@ mod less_eq;
 mod max_pool;
 mod multiply;
 mod negative;
-mod reduce_mean;
 mod util;
 
 pub use self::add::Add;
@@ -19,5 +18,4 @@ pub use self::less_eq::LessEqual;
 pub use self::max_pool::MaxPool;
 pub use self::multiply::Multiply;
 pub use self::negative::Negative;
-pub use self::reduce_mean::ReduceMean;
 pub use self::util::{Parameter, ParameterVector, RoundingType};
