@@ -1,6 +1,6 @@
 # ngraph-rs
 
-[![Build Status](https://travis-ci.com/crackcomm/ngraph-rs.svg?branch=master)](https://travis-ci.com/crackcomm/ngraph-rs)
+[![Build Status](https://travis-ci.org/crackcomm/ngraph-rs.svg?branch=master)](https://travis-ci.org/crackcomm/ngraph-rs)
 
 Rust bindings for [nGraph](https://github.com/NervanaSystems/ngraph/) compiler.
 
