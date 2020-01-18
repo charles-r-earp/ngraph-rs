@@ -13,16 +13,35 @@ fn main() {
     let ngraph_out_dir = out_dir.join("ngraph");
     if !ngraph_out_dir.join("build").join("CMakeCache.txt").exists() {
         let _ = std::fs::create_dir_all(&ngraph_out_dir.join("build"));
-        let _libngraph = cmake::Config::new("third_party/ngraph")
+        let enable_cpu = if cfg!(windows) {
+            "OFF"
+        } else if is_ci {
+            "OFF"
+        } else {
+            "ON"
+        };
+        let enable_interpreter = if cfg!(windows) || is_ci { "ON" } else { "OFF" };
+        let mut ngraph_cmake = cmake::Config::new("third_party/ngraph");
+        ngraph_cmake
             .profile("Release")
             .define("NGRAPH_NOP_ENABLE", "OFF")
-            .define("NGRAPH_CPU_ENABLE", if is_ci { "OFF" } else { "ON" })
             .define("NGRAPH_TOOLS_ENABLE", "OFF")
             .define("NGRAPH_UNIT_TEST_ENABLE", "OFF")
-            .define("NGRAPH_USE_PREBUILT_LLVM", "ON")
+            .define(
+                "NGRAPH_USE_PREBUILT_LLVM",
+                if cfg!(windows) { "OFF" } else { "ON" },
+            )
+            .define("NGRAPH_CPU_ENABLE", enable_cpu)
+            .define("NGRAPH_INTERPRETER_ENABLE", enable_interpreter)
+            .define("NGRAPH_ENABLE_CPU_CONV_AUTO", "OFF")
+            .define("NGRAPH_JSON_ENABLE", "OFF")
+            .define("NGRAPH_PLAIDML_ENABLE", "OFF")
             .define("NGRAPH_ONNX_IMPORT_ENABLE", "ON")
-            .out_dir(&ngraph_out_dir)
-            .build();
+            .out_dir(&ngraph_out_dir);
+        if cfg!(windows) {
+            ngraph_cmake.define("CMAKE_CXX_FLAGS", "/w");
+        }
+        let _libngraph = ngraph_cmake.build();
     } else {
         println!("cargo:root={}", ngraph_out_dir.display());
     }

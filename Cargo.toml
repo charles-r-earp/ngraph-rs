@@ -1,7 +1,10 @@
 [package]
 name = "ngraph"
-version = "0.0.1"
-authors = ["Charles Earp <charles.r.earp@gmail.com>"]
+version = "0.1.0"
+authors = [
+  "Charles Earp <charles.r.earp@gmail.com>",
+  "Łukasz Kurowski <crackcomm@gmail.com>"
+]
 edition = "2018"
 description = "Rust bindings for nGraph https://github.com/NervanaSystems/ngraph"
 license = "MIT"
