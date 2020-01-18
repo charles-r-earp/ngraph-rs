@@ -21,7 +21,6 @@ fn main() {
         } else {
             "ON"
         };
-        let enable_interpreter = if cfg!(windows) || is_ci { "ON" } else { "OFF" };
         let mut ngraph_cmake = cmake::Config::new("third_party/ngraph");
         ngraph_cmake
             .profile("Release")
@@ -33,7 +32,6 @@ fn main() {
                 if cfg!(windows) { "OFF" } else { "ON" },
             )
             .define("NGRAPH_CPU_ENABLE", enable_cpu)
-            .define("NGRAPH_INTERPRETER_ENABLE", enable_interpreter)
             .define("NGRAPH_ENABLE_CPU_CONV_AUTO", "OFF")
             .define("NGRAPH_JSON_ENABLE", "OFF")
             .define("NGRAPH_PLAIDML_ENABLE", "OFF")
