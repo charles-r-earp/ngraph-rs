@@ -32,6 +32,7 @@ fn main() {
                 if cfg!(windows) { "OFF" } else { "ON" },
             )
             .define("NGRAPH_CPU_ENABLE", enable_cpu)
+            .define("NGRAPH_INTERPRETER_ENABLE", "ON")
             .define("NGRAPH_ENABLE_CPU_CONV_AUTO", "OFF")
             .define("NGRAPH_JSON_ENABLE", "OFF")
             .define("NGRAPH_PLAIDML_ENABLE", "OFF")
