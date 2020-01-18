@@ -4,6 +4,7 @@ extern crate cpp_build;
 use std::path::PathBuf;
 
 fn main() {
+    println!("cargo:rerun-if-changed=src");
     let travis = std::env::var_os("TRAVIS");
     let gitlab_ci = std::env::var_os("GITLAB_CI");
     // for more: https://github.com/sagiegurari/ci_info/blob/master/src/config.rs

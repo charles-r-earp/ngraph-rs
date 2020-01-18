@@ -14,5 +14,5 @@ notifications:
 script:
   - "travis_wait cargo build --examples"
   - "cargo test"
-  - "cargo run --example mean_reverse"
+  - "cargo run --example add"
 sudo: required
