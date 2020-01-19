@@ -12,7 +12,7 @@ fn main() {
 
     let out_dir = PathBuf::from(std::env::var("OUT_DIR").unwrap());
     let ngraph_out_dir = out_dir.join("ngraph");
-    if !ngraph_out_dir.join("build").join("CMakeCache.txt").exists() {
+    if is_ci || !ngraph_out_dir.join("build").join("CMakeCache.txt").exists() {
         let _ = std::fs::create_dir_all(&ngraph_out_dir.join("build"));
         let enable_cpu = if cfg!(windows) {
             "OFF"
