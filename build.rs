@@ -14,13 +14,7 @@ fn main() {
     let ngraph_out_dir = out_dir.join("ngraph");
     if is_ci || !ngraph_out_dir.join("build").join("CMakeCache.txt").exists() {
         let _ = std::fs::create_dir_all(&ngraph_out_dir.join("build"));
-        let enable_cpu = if cfg!(windows) {
-            "OFF"
-        } else if is_ci {
-            "OFF"
-        } else {
-            "ON"
-        };
+        let enable_cpu = if cfg!(windows) { "OFF" } else { "ON" };
         let mut ngraph_cmake = cmake::Config::new("third_party/ngraph");
         ngraph_cmake
             .profile("Release")
