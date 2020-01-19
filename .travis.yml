@@ -1,15 +1,17 @@
 ---
 cache: cargo
 dist: xenial
-env: 
-  global: 
+env:
+  global:
     - CRATE_NAME=ngraph
-install: 
+install:
   - "source ~/.cargo/env || true"
 language: rust
-env: TARGET=x86_64-unknown-linux-gnu
-notifications: 
-  email: 
+env:
+  - TARGET=x86_64-unknown-linux-gnu
+  - NGRAPH_CPU_ENABLE=OFF
+notifications:
+  email:
     on_success: never
 script:
   - "travis_wait cargo build --examples"
