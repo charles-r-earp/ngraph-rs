@@ -46,10 +46,14 @@ fn main() {
     }
     println!("cargo:rustc-link-search={}", ngraph_out_dir.display());
 
-    cpp_build::Config::new()
+    let mut build = cpp_build::Config::new();
+    build
         .include("third_party/ngraph/src")
-        .object(ngraph_out_dir.join("lib").join("libngraph.so"))
-        .build("src/lib.rs");
+        .object(ngraph_out_dir.join("lib").join("libngraph.so"));
+    if !is_ci {
+        build.object(ngraph_out_dir.join("lib").join("libcpu_backend.so"));
+    }
+    build.build("src/lib.rs");
     println!(
         "cargo:rustc-link-search={}",
         ngraph_out_dir.join("lib").display()
