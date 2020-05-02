@@ -15,9 +15,9 @@ fn main() {
     if is_ci || !ngraph_out_dir.join("build").join("CMakeCache.txt").exists() {
         let _ = std::fs::create_dir_all(&ngraph_out_dir.join("build"));
         let enable_cpu = if let Some(var) = std::env::var_os("NGRAPH_CPU_ENABLE") {
-            var
+            var.to_str().unwrap().to_owned()
         } else {
-            "ON"
+            "ON".to_owned()
         };
         let mut ngraph_cmake = cmake::Config::new("third_party/ngraph");
         ngraph_cmake
@@ -29,7 +29,7 @@ fn main() {
                 "NGRAPH_USE_PREBUILT_LLVM",
                 if cfg!(windows) { "OFF" } else { "ON" },
             )
-            .define("NGRAPH_CPU_ENABLE", enable_cpu)
+            .define("NGRAPH_CPU_ENABLE", &enable_cpu)
             .define("NGRAPH_INTERPRETER_ENABLE", "ON")
             .define("NGRAPH_JSON_ENABLE", "OFF")
             .define("NGRAPH_PLAIDML_ENABLE", "OFF")
