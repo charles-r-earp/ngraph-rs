@@ -14,7 +14,7 @@ notifications:
   email:
     on_success: never
 script:
-  - "travis_wait cargo build --examples"
+  - "travis_wait 30 cargo build --examples"
   - "cargo test"
   - "cargo run --example add"
 sudo: required
