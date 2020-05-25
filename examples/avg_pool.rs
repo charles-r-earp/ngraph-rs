@@ -27,7 +27,7 @@ fn main() {
     // Make the function
     let f = Function::new([&Node::from(&avg_pool)], [&input]);
 
-    let backend = runtime::Backend::create("CPU").unwrap();
+    let backend = runtime::Backend::create("CPU", true).unwrap();
 
     // Allocate tensors for arguments a, b, c
     let t_a = backend.create_tensor(ElementType::F32, &input_shape);

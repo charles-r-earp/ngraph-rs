@@ -20,7 +20,7 @@ fn main() {
     println!("using {:?}", device);
 
     // Create the backend
-    let backend = runtime::Backend::create(device).unwrap();
+    let backend = runtime::Backend::create(device, true).unwrap();
 
     // Allocate tensors for arguments a, b, c
     let t_a = backend.create_tensor(ElementType::F32, &s);

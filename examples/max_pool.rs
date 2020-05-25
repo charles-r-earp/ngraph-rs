@@ -20,7 +20,7 @@ fn main() {
     // Make the function
     let f = Function::new([&Node::from(&max_pool)], [&a]);
 
-    let backend = runtime::Backend::create("CPU").unwrap();
+    let backend = runtime::Backend::create("CPU", true).unwrap();
 
     // Allocate tensors for arguments a, b, c
     let t_a = backend.create_tensor(ElementType::F32, &s);

@@ -63,8 +63,6 @@ fn main() {
         .include(build_deps_dir.join("ext_onnx-src"))
         .include(onnx_build_dir.clone())
         .include(build_dir.join("protobuf").join("include"))
-        .object(onnx_build_dir.join("libonnx.a"))
-        .object(onnx_build_dir.join("libonnx_proto.a"))
         .object(ngraph_out_dir.join("lib").join("libngraph.so"))
         .object(ngraph_out_dir.join("lib").join("libonnx_importer.so"));
     if !is_ci {

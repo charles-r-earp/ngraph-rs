@@ -15,7 +15,7 @@ fn main() {
         println!("using {:?}", device);
 
         // Create the backend
-        let backend = runtime::Backend::create(device).unwrap();
+        let backend = runtime::Backend::create(device, true).unwrap();
         println!("Backend create duration: {:?}", now.elapsed());
 
         let s = shape![1, size];
