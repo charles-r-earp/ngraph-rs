@@ -24,7 +24,7 @@ fn main() {
 
     let now = Instant::now();
     // Create the backend
-    let backend = runtime::Backend::create(device).unwrap();
+    let backend = runtime::Backend::create(device, true).unwrap();
     println!("Backend create duration: {:?}", now.elapsed());
 
     // Allocate tensors for arguments a, b, c

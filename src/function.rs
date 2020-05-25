@@ -1,6 +1,10 @@
 use crate::{op, Node, NodeVector, ParameterVector};
 use cpp::*;
 
+use prost::Message;
+
+use onnx_pb::ModelProto;
+
 cpp! {{
   #include <ngraph/function.hpp>
   #include <ngraph/frontend/onnx_import/onnx.hpp>
@@ -13,6 +17,13 @@ cpp! {{
     }
   };
 }}
+
+/// Creates ONNX function from ONNX model.
+pub fn create_function(model: &ModelProto) -> Result<Function, prost::EncodeError> {
+    let mut body = Vec::new();
+    model.encode(&mut body)?;
+    Ok(Function::from_onnx_bytes(body.as_slice()))
+}
 
 cpp_class!(pub unsafe struct Function as "std::shared_ptr<ngraph::Function>");
 

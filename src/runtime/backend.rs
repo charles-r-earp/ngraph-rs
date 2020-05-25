@@ -81,14 +81,14 @@ impl Backend {
         })
     }
     #[inline]
-    pub fn create<S>(name: S) -> Result<Self, BackendError>
+    pub fn create<S>(name: S, dynamic: bool) -> Result<Self, BackendError>
     where
         S: AsRef<[u8]>,
     {
         let name = CString::new(name.as_ref()).unwrap();
         let cstr: *const c_char = name.as_ptr();
-        let backend = cpp!(unsafe [cstr as "const char*"] -> Backend as "std::shared_ptr<ngraph::runtime::Backend>" {
-          return ngraph::runtime::Backend::create(std::string(cstr));
+        let backend = cpp!(unsafe [cstr as "const char*", dynamic as "bool"] -> Backend as "std::shared_ptr<ngraph::runtime::Backend>" {
+          return ngraph::runtime::Backend::create(std::string(cstr), dynamic);
         });
         if !backend.is_null() {
             Ok(backend)
