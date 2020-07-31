@@ -1,0 +1,3 @@
+[submodule "third_party/ngraph"]
+	path = third_party/ngraph
+	url = https://github.com/NervanaSystems/ngraph.git

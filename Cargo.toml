@@ -1,7 +1,10 @@
 [package]
 name = "ngraph"
-version = "0.0.1"
-authors = ["Charles Earp <charles.r.earp@gmail.com>"]
+version = "0.1.0"
+authors = [
+  "Charles Earp <charles.r.earp@gmail.com>",
+  "Łukasz Kurowski <crackcomm@gmail.com>"
+]
 edition = "2018"
 description = "Rust bindings for nGraph https://github.com/NervanaSystems/ngraph"
 license = "MIT"
@@ -9,7 +12,14 @@ repository = "https://github.com/charles-r-earp/ngraph-rs"
 keywords = ["Auto", "Learning", "Tensor", "Grad", "Graph"]
 
 [dependencies]
-cpp = "0.5.1"
+cpp = "^0.5.1"
+onnx-pb = "^0.1.4"
+prost = "^0.6.1"
 
 [build-dependencies]
 cpp_build = "0.5.1"
+cmake = "^0.1.42"
+
+[dev-dependencies]
+rand = "^0.7.2"
+onnx-helpers = "^2.2.1"

@@ -1,58 +1,34 @@
-[![Build Status](https://travis-ci.com/charles-r-earp/ngraph-rs.svg?branch=master)](https://travis-ci.com/charles-r-earp/ngraph-rs)
 # ngraph-rs
-Rust bindings for nGraph
 
-Work in Progress!!!
+[![Build Status](https://travis-ci.org/crackcomm/ngraph-rs.svg?branch=master)](https://travis-ci.org/crackcomm/ngraph-rs)
 
-# Dependencies
-See https://github.com/NervanaSystems/ngraph and https://ngraph.nervanasys.com/docs/latest/buildlb.html
+Rust bindings for [nGraph](https://github.com/NervanaSystems/ngraph/) compiler.
 
-# Cargo
-Add the following to cargo.toml:
-ngraph = { git = "https://github.com/charles-r-earp/ngraph-rs" }
+## Build
 
-# Example 
-Rustified version of example from https://ngraph.nervanasys.com/docs/latest/core/constructing-graphs/execute.html
+Codegen in nGraph works currently only on Linux.
+
+### Windows
+
+It could work on Windows using interpreter backend but doesn't.
+
+## Usage
+
+```Toml
+[dependencies]
+ngraph = { git = "https://github.com/crackcomm/ngraph-rs" }
 ```
-use ngraph::*;
-  
-// Build the graph
-let s = shape![2, 3];
-let a = op::Parameter::new(ElementType::F32, &s);
-let b = op::Parameter::new(ElementType::F32, &s); 
-let c = op::Parameter::new(ElementType::F32, &s);
 
-let t0 = op::Add::new(&a, &b);
-let t1 = op::Multiply::new(&t0, &c);
+## Examples
 
-// Make the function
-let f = Function::new([&Node::from(&t1)], [&a, &b, &c]);
+See the [examples](examples) directory.
 
-println!("registered devices: {:?}", runtime::Backend::get_registered_devices());
+## Authors
 
-// Create the backend
-let backend = runtime::Backend::create("CPU").unwrap();
+* [Charles Earp](https://github.com/charles-r-earp/ngraph-rs) - Original author.
+* [Łukasz Kurowski](https://github.com/crackcomm/ngraph-rs) - Contributor.
 
-// Allocate tensors for arguments a, b, c
-let t_a = backend.create_tensor(ElementType::F32, &s);
-let t_b = backend.create_tensor(ElementType::F32, &s);
-let t_c = backend.create_tensor(ElementType::F32, &s);
-// Allocate tensor for the result
-let mut t_result = backend.create_tensor(ElementType::F32, &s);
+## License
 
-// Initialize tensors 
-t_a.write::<f32>(0, &[1., 2., 3., 
-                      4., 5., 6.]);
-t_b.write::<f32>(0, &[7., 8., 9.,
-                      10., 11., 12.]);
-t_c.write::<f32>(0, &[1., 0., -1.,
-                     -1., 1., 2.]);          
-// Invoke the function
-let exec = backend.compile(&f).unwrap();
-exec.call([&mut t_result], [&t_a, &t_b, &t_c]);
-
-// Get the result
-let mut r = [0f32; 6];
-t_result.read(0, &mut r);
-println!("[{:?}\n {:?}]", &r[..3], &r[3..]);
-```
+* [ngraph-rs](https://github.com/crackcomm/ngraph-rs) is licensed under MIT license.
+* [nGraph](https://github.com/NervanaSystems/ngraph/) is licensed under Apache 2.0 License.
